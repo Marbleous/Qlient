@@ -109,7 +109,7 @@ let getGame = (gameId) => {
   })
 }
 
-let performMove = () => {}
+let performMove = () => {
 
   // this is where we would put our logic for deciding which move to make
   // here we are just attacking all the time. We should probably be more
