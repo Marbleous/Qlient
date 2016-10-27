@@ -20,58 +20,34 @@ const apiKey = new Buffer(`${config.apiId}:${config.apiSecret}`).toString('base6
 
 // here we connect to the socket, passing the apiId and apiSecret
 const socket = io.connect(`http://${config.host}:${config.socketPort}`, {query: socketArguments})
-console.log('Connecting....')
+console.log('connecting')
 
 socket.on('connect', (data) => {
   // we have successfully connected to the Qritter Wars Socket Server
-  console.log('You are connected')
+  console.log('connected')
 })
 
 socket.on('success', (player) => {
   // we have successfully authenticated to the Qritter Wars Socket Server
   playerId = player.id
-  console.log('You are logged in')
+  console.log('logged in')
 })
 
 socket.on('start game', (game) => {
   // our Qritter has started battling against another Qritter
-  console.log('Game  has started')
+  console.log('game started')
 
   const count = 0;
 
-  // we want to retrieve the game information
-  getGame(game.id)
-      .then((game) => {
-        // we check game.current to see if it is our turn to play.
-        // if so, we perform move
-        if (game.current === playerId) {
-          performMove()
-        }
-      })
-})
-
-socket.on('in game', (game) => {
-  // we were placed into a game prior to being connected to the socket server,
-  // this usually occurs when reconnecting to the socket after being
-  // disconnected
-  console.log('You are already in game')
-
-  getGame(game.id)
-      .then((game) => {
-        if (game.current === playerId) {
-          console.log('your turn')
-          // we check game.current to see if it is our turn to play.
-          // if so, we perform move
-          performMove()
-        }
-      })
+  if (game.current === playerId) {
+    performMove()
+  }
 })
 
 socket.on('move played', (move) => {
   // someone has played a move in our game
   // if the move just played wasn't by us, it is now
   // our turn to play.
-
   if (move.player != playerId) {
     console.log(`opponent performed ${move.result}`)
     performMove()
@@ -116,7 +92,7 @@ let performMove = () => {
   // creative than this. If we don't heal our Qritter will most likely be
   // defeated in no time.
 
-  // Our logic is that of Wild Wild West
+  l// Our logic is that of Wild Wild West
   if(count === 0){
     heal()
     count++
@@ -203,9 +179,9 @@ let getGameStats = (gameId) => {
   getGame(gameId)
       .then((game) => {
         if (game.winner === playerId) {
-          console.log("We Won!!!")
+          console.log("You Won!!!")
         } else {
-          console.log("We Lost :(")
+          console.log("You Lost :(")
         }
         return getGameMoves(gameId)
       })
