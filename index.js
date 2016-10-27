@@ -37,6 +37,8 @@ socket.on('start game', (game) => {
   // our Qritter has started battling against another Qritter
   console.log('Game  has started')
 
+  const count = 0;
+
   // we want to retrieve the game information
   getGame(game.id)
       .then((game) => {
@@ -107,11 +109,7 @@ let getGame = (gameId) => {
   })
 }
 
-
-
-let performMove = () => {
-
-  let count = 0;
+let performMove = () => {}
 
   // this is where we would put our logic for deciding which move to make
   // here we are just attacking all the time. We should probably be more
@@ -153,7 +151,7 @@ let heal = () => {
     if (error || res.statusCode !== 200) {
       console.log("Error Performing Move", error || res.body)
     } else {
-      console.log(`Geal performed successfully`)
+      console.log(`Heal performed successfully`)
     }
   })
 }
