@@ -20,22 +20,22 @@ const apiKey = new Buffer(`${config.apiId}:${config.apiSecret}`).toString('base6
 
 // here we connect to the socket, passing the apiId and apiSecret
 const socket = io.connect(`http://${config.host}:${config.socketPort}`, {query: socketArguments})
-console.log('connecting')
+console.log('Connecting....')
 
 socket.on('connect', (data) => {
   // we have successfully connected to the Qritter Wars Socket Server
-  console.log('connected')
+  console.log('You are connected')
 })
 
 socket.on('success', (player) => {
   // we have successfully authenticated to the Qritter Wars Socket Server
   playerId = player.id
-  console.log('logged in')
+  console.log('You are logged in')
 })
 
 socket.on('start game', (game) => {
   // our Qritter has started battling against another Qritter
-  console.log('game started')
+  console.log('Game  has started')
 
   // we want to retrieve the game information
   getGame(game.id)
@@ -52,7 +52,7 @@ socket.on('in game', (game) => {
   // we were placed into a game prior to being connected to the socket server,
   // this usually occurs when reconnecting to the socket after being
   // disconnected
-  console.log('already in game')
+  console.log('You are already in game')
 
   getGame(game.id)
       .then((game) => {
@@ -174,9 +174,9 @@ let getGameStats = (gameId) => {
   getGame(gameId)
       .then((game) => {
         if (game.winner === playerId) {
-          console.log("You Won!!!")
+          console.log("We Won!!!")
         } else {
-          console.log("You Lost :(")
+          console.log("We Lost :(")
         }
         return getGameMoves(gameId)
       })
