@@ -118,17 +118,15 @@ let performMove = () => {
   // creative than this. If we don't heal our Qritter will most likely be
   // defeated in no time.
 
-  // TODO: insert attach logic
   // Our logic is that of Wild Wild West
-
   if(count === 0){
-    attack()
+    heal()
     count++
   }else if (count === 1) {
     attack()
     count++
   }else{
-    heal()
+    attack()
     count = 0
   }
 
