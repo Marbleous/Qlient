@@ -107,17 +107,30 @@ let getGame = (gameId) => {
   })
 }
 
+
+
 let performMove = () => {
+
+  let count = 0;
 
   // this is where we would put our logic for deciding which move to make
   // here we are just attacking all the time. We should probably be more
   // creative than this. If we don't heal our Qritter will most likely be
   // defeated in no time.
 
-  // insert attach logic
-  attack()
-  // heal()
+  // TODO: insert attach logic
+  // Our logic is that of Wild Wild West
 
+  if(count === 0){
+    attack()
+    count++
+  }else if (count === 1) {
+    attack()
+    count++
+  }else{
+    heal()
+    count = 0
+  }
 
 }
 
