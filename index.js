@@ -114,6 +114,14 @@ let performMove = () => {
   // creative than this. If we don't heal our Qritter will most likely be
   // defeated in no time.
 
+  // insert attach logic
+  attack()
+  // heal()
+
+
+}
+
+let attack = () => {
   let body = {action: "attack"}
   let options = createOptions("moves", "POST", body)
 
@@ -121,10 +129,22 @@ let performMove = () => {
     if (error || res.statusCode !== 200) {
       console.log("Error Performing Move", error || res.body)
     } else {
-      console.log(`attack performed successfully`)
+      console.log(`Attack performed successfully`)
     }
   })
+}
 
+let heal = () => {
+  let body = {action: "heal"}
+  let options = createOptions("moves", "POST", body)
+
+  request.post(options, (error, res, body) => {
+    if (error || res.statusCode !== 200) {
+      console.log("Error Performing Move", error || res.body)
+    } else {
+      console.log(`Geal performed successfully`)
+    }
+  })
 }
 
 let createOptions = (endpoint, method, body) => {
